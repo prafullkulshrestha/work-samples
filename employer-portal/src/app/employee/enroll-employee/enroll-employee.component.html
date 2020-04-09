@@ -6,9 +6,9 @@
       <form (ngSubmit)="onSubmit()" novalidate [formGroup]="employeeFormGroup" #formDirective="ngForm">
         <mat-tab-group>
           <mat-tab label="General Information" >
-            <table style="width: 100%" cellspacing="10">
-              <tr>
-                <td class="col-sm-4" floatLabel="always">
+            <div style="width: 100%" cellspacing="10">
+              <div class="row">
+                <div class="col-sm-4" floatLabel="always">
                   <mat-form-field>
                     <mat-label>First Name</mat-label>
                     <input matInput placeholder="First Name" autocomplete="off" [formControl]="controls.firstName" required>
@@ -18,9 +18,9 @@
                           First name is required.
                       </span>
                     </mat-error>
-                </td>
+                  </div>
             
-                <td class="col-sm-4" floatLabel="always">
+                <div class="col-sm-4" floatLabel="always">
                     <mat-form-field>
                         <mat-label>Last Name</mat-label>
                         <input matInput placeholder="Last Name" autocomplete="off" [formControl]="controls.lastName" required>
@@ -30,39 +30,41 @@
                               Last name is required.
                           </span>
                         </mat-error>
-                </td>
+                      </div>
+
+                      <div class="col-sm-4" floatLabel="always">
+                          <mat-form-field>
+                            <mat-label>Date Of Birth</mat-label>
+                            <input  autocomplete="off" [formControl]="controls.dob"  matInput [matDatepicker]="picker" placeholder="Date of birth" required >
+                            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                            <mat-datepicker #picker></mat-datepicker>
+                          </mat-form-field>
+                          <mat-error class="employeeError" *ngIf="controls.dob.hasError('required') && controls.dob.touched">
+                              <span>
+                                  Date of birth is required.
+                              </span>
+                            </mat-error>
+                          </div>
               
-                  <td class="col-sm-4" floatLabel="always">
-                    <mat-form-field>
-                      <mat-label>Gender</mat-label>
-                      <mat-select autocomplete="off" [formControl]="controls.gender"placeholder="Gender" required>
-                          <mat-option value="m">Male</mat-option>
-                          <mat-option value="f">Female</mat-option>
-                      </mat-select>
-                    </mat-form-field>
-                    <mat-error class="employeeError" *ngIf="controls.gender.hasError('required') && controls.gender.touched">
-                        <span>
-                            Gender is required.
-                        </span>
-                      </mat-error>
-                  </td>
-                </tr>
-              <tr>
-                  <td class="col-sm-auto" floatLabel="always">
-                    <mat-form-field>
-                      <mat-label>Date Of Birth</mat-label>
-                      <input  autocomplete="off" [formControl]="controls.dob"  matInput [matDatepicker]="picker" placeholder="Date of birth" required >
-                      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-                      <mat-datepicker #picker></mat-datepicker>
-                    </mat-form-field>
-                    <mat-error class="employeeError" *ngIf="controls.dob.hasError('required') && controls.dob.touched">
-                        <span>
-                            Date of birth is required.
-                        </span>
-                      </mat-error>
-                  </td>
+                </div>
+              <div class="row">
+                  <div class="col-sm-4" floatLabel="always">
+                      <mat-form-field>
+                        <mat-label>Gender</mat-label>
+                        <mat-select autocomplete="off" [formControl]="controls.gender"placeholder="Gender" required>
+                            <mat-option value="m">Male</mat-option>
+                            <mat-option value="f">Female</mat-option>
+                        </mat-select>
+                      </mat-form-field>
+                      <mat-error class="employeeError" *ngIf="controls.gender.hasError('required') && controls.gender.touched">
+                          <span>
+                              Gender is required.
+                          </span>
+                        </mat-error>
+                      </div>
+                
               
-                  <td class="col-sm-4" floatLabel="always">
+                  <div class="col-sm-4" floatLabel="always">
                       <mat-form-field>
                         <mat-label>Department</mat-label>
                         <mat-select autocomplete="off" [formControl]="controls.department"placeholder="Department" required>
@@ -75,9 +77,9 @@
                               Department is required.
                           </span>
                         </mat-error>
-                    </td>
-                  </tr>
-            </table>
+                      </div>
+                  </div>
+                </div>
           </mat-tab>
           <mat-tab label="Other Information" class="my-tab">
             <table style="width: 100%" cellspacing="10">

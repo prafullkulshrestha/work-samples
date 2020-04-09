@@ -1,5 +1,5 @@
 @import "custom"; 
-@import "breakpoints";
+@import "bootstrap-grid";
 //Here we importing _custom.scss file but we don't need to include underscore.
 $sample-app-theme:   mat-light-theme($primary,$accent,$warn);
 $background: map-get($sample-app-theme, background);
@@ -41,7 +41,7 @@ html, body { height: 100%; background-color:#ffffff }
 
     .mat-select { 
         display: unset; 
-        height: 0em;
+        margin-top: 0.75em;
     }
     input.mat-input-element {
         margin-top: 0.75em;
@@ -66,3 +66,19 @@ html, body { height: 100%; background-color:#ffffff }
             text-align: center;
         }
       }
+
+      .mat-toolbar{
+        height: 10vh;
+      }
+
+      .mat-toolbar-single-row{
+        padding-left: 50%
+    }
+    .mat-drawer-inner-container {
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+        background: #6aa84f;
+        font-size: 100;
+        -webkit-overflow-scrolling: touch;
+    } 
