@@ -4,20 +4,20 @@ export class Employee {
     lastName: string;
     gender: string;
     dateOfBirth: string;
-    departmentName: string;
+    department: string;
 
     constructor( id?: number,
         firstName?: string,
         lastName?: string,
         gender?: string,
         dateOfBirth?: string,
-        departmentName?: string){
-        
+        department?: string) {
+
             this.id = id;
             this.firstName = firstName;
             this.lastName = lastName;
             this.gender = gender;
             this.dateOfBirth = dateOfBirth;
-            this.departmentName = departmentName;
+            this.department = department;
     }
 }

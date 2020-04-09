@@ -1,3 +1,45 @@
-<p>
-  employee-list works!
-</p>
+
+  <mat-card >
+      <mat-card-header>
+          <mat-card-title>View All Employees</mat-card-title>
+        </mat-card-header>
+      <mat-spinner [style.display]="loading ? 'block' : 'none'" class="spinner-position" 
+      mode="indeterminate"></mat-spinner>
+      
+      <mat-table matSortActive="firstName" matSortDirection="asc"  [style.display]="loading === false ? 'block' : 'none'" #table [dataSource]="dataSource" matSort (matSortChange)="onSortData($event)">
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>      
+    
+        <ng-container matColumnDef="firstName">
+          <mat-header-cell *matHeaderCellDef mat-sort-header> First Name </mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{element.firstName}} </mat-cell>
+        </ng-container>
+  
+        <ng-container matColumnDef="lastName">
+          <mat-header-cell *matHeaderCellDef mat-sort-header> Last Name </mat-header-cell>
+          <mat-cell *matCellDef="let customer"> {{customer.lastName}} </mat-cell>
+        </ng-container>
+    
+        <ng-container matColumnDef="gender">
+          <mat-header-cell *matHeaderCellDef mat-sort-header> Gender </mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{element.gender}} </mat-cell>
+        </ng-container>
+    
+        <ng-container matColumnDef="dateOfBirth">
+          <mat-header-cell *matHeaderCellDef mat-sort-header> Date Of Birth </mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{element.dateOfBirth}} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="department">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> Department</mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.department}} </mat-cell>
+        </ng-container>
+     
+  
+      </mat-table>
+      <mat-paginator  #paginator [style.display]="loading === false ? 'block' : 'none'" 
+      [length]="totalCount"
+      [pageSizeOptions]="[5, 10, 25, 100]"
+      [pageSize]="pageSize" 
+      (page)="onPageChanged($event)"></mat-paginator>
+    </mat-card>

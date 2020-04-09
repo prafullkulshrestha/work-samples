@@ -1,0 +1,68 @@
+@import "custom"; 
+@import "breakpoints";
+//Here we importing _custom.scss file but we don't need to include underscore.
+$sample-app-theme:   mat-light-theme($primary,$accent,$warn);
+$background: map-get($sample-app-theme, background);
+//$bg-color: #32941c;
+//$background: map_merge($background, (background: $bg-color, mat-paginator: $bg-color, dialog:$bg-color));
+
+$theme: map_merge($sample-app-theme, (background: $background));
+@include angular-material-theme($theme);
+@include mat-paginator-theme($theme);
+//Just so we can see a background color
+html, body { height: 100%; background-color:#ffffff }
+
+.mat-card {
+    padding: 0%;
+    .mat-card-header {
+        background:#6aa84f;
+        height: 30%;
+       
+    
+        .mat-card-title {
+            margin-top: 5%; 
+        }
+    }
+
+    .mat-paginator {
+        background: #6aa84f;
+        height: 20%;
+    }
+
+}
+
+    .mat-cell {
+        word-break: break-word;
+    }
+
+    .mat-calendar-header {
+        background: #6aa84f;
+    }
+
+    .mat-select { 
+        display: unset; 
+        height: 0em;
+    }
+    input.mat-input-element {
+        margin-top: 0.75em;
+        /* height: 5.125px; */
+    }
+    .mat-sort-header-container {
+        display: flex;
+        cursor: pointer;
+        align-items: center;
+        font-size: 14px;
+    }
+
+    .mat-row:hover {
+        background: #d2e5ca;
+      }
+      .mat-snack-bar-container{
+        background: #6aa84f;
+        color:rgba(0, 0, 0, 0.87);
+        align-content: center;
+        span {
+            width: 100%;
+            text-align: center;
+        }
+      }

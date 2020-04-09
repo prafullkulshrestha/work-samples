@@ -4,8 +4,8 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing/app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
+import { FormsModule } from '@angular/forms';
 import 'hammerjs';
-
 @NgModule({
   declarations: [
     AppComponent
@@ -14,7 +14,9 @@ import 'hammerjs';
     BrowserModule,
     BrowserAnimationsModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule
+
   ],
   providers: [],
   bootstrap: [AppComponent]

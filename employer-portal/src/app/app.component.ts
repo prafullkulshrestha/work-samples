@@ -7,4 +7,9 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'employer-portal';
+  public drawerOpen = false;
+
+  public setDrawerOpen(isOpen): void {
+  		this.drawerOpen = isOpen;
+  	}
 }

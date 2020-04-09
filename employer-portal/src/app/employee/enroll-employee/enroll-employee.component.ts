@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { EmployeeService } from '../../shared/services/employee.service';
+import { EmployerService } from '../../shared/services/employee.service';
 import { Employee } from '../../models/Employee';
 @Component({
   selector: 'app-enroll-employee',
@@ -11,7 +11,7 @@ export class EnrollEmployeeComponent implements OnInit {
    employee: Employee = new Employee();
    submitted = false;
 
-  constructor(private employeeService: EmployeeService) { }
+  constructor(private employeeService: EmployerService) { }
 
   ngOnInit() {
   }

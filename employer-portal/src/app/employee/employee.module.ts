@@ -3,11 +3,12 @@ import { CommonModule } from '@angular/common';
 import { EnrollEmployeeComponent } from './enroll-employee/enroll-employee.component';
 import { EmployeeListComponent } from './employee-list/employee-list.component';
 import { RouterModule } from '@angular/router';
-import { FormsModule } from '@angular/forms';
-import { EmployeeService } from "../shared/services/employee.service";
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { EmployerService } from '../shared/services/employee.service';
+import { EpSharedModule } from '../shared/shared.module';
 
 const routing: ModuleWithProviders = RouterModule.forChild([
-	{ path: '', component: EmployeeListComponent },
+	{ path: '', component: EnrollEmployeeComponent },
 	{ path: 'employees', component: EmployeeListComponent },
   { path: 'add', component: EnrollEmployeeComponent }
 
@@ -17,10 +18,15 @@ const routing: ModuleWithProviders = RouterModule.forChild([
 @NgModule({
   imports: [
     CommonModule
+    , EpSharedModule
     , routing
     , FormsModule
+    , ReactiveFormsModule
   ],
-  providers: [EmployeeService],
+  providers: [EmployerService],
+  exports: [
+    EpSharedModule
+  ],
   bootstrap: [EmployeeListComponent],
   declarations: [EnrollEmployeeComponent, EmployeeListComponent]
 })

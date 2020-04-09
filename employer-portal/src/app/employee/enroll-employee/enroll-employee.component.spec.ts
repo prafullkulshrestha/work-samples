@@ -3,7 +3,7 @@ import { FormsModule } from '@angular/forms';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { EnrollEmployeeComponent } from './enroll-employee.component';
 import { of } from 'rxjs';
-import { EmployeeService } from '../../shared/services/employee.service';
+import { EmployerService } from '../../shared/services/employee.service';
 import { NO_ERRORS_SCHEMA } from "@angular/core";
 
 describe('EnrollEmployeeComponent', () => {
@@ -24,7 +24,7 @@ describe('EnrollEmployeeComponent', () => {
       imports: [ FormsModule, HttpClientTestingModule ],
       declarations: [ EnrollEmployeeComponent ],
       providers: [
-        EmployeeService
+        EmployerService
 			],
 			schemas: [NO_ERRORS_SCHEMA]
     })
@@ -45,7 +45,7 @@ describe('EnrollEmployeeComponent', () => {
   });
 
   it('should return saved employee if called asynchronously', fakeAsync(() => {
-    let employeeService = fixture.debugElement.injector.get(EmployeeService);
+    let employeeService = fixture.debugElement.injector.get(EmployerService);
      spyOn(employeeService, "createEmployee").and.returnValue(of(data));
      component.save();
     fixture.detectChanges();
