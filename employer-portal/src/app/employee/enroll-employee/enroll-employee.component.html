@@ -1,3 +1,95 @@
-<p>
-  enroll-employee works!
-</p>
+<mat-card class="my-card">
+    <mat-card-header>
+      <mat-card-title>Enroll New Employee</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <form (ngSubmit)="onSubmit()" novalidate [formGroup]="employeeFormGroup" #formDirective="ngForm">
+        <mat-tab-group>
+          <mat-tab label="General Information" >
+            <table style="width: 100%" cellspacing="10">
+              <tr>
+                <td class="col-sm-4" floatLabel="always">
+                  <mat-form-field>
+                    <mat-label>First Name</mat-label>
+                    <input matInput placeholder="First Name" autocomplete="off" [formControl]="controls.firstName" required>
+                  </mat-form-field>
+                  <mat-error class="employeeError" *ngIf="controls.firstName.hasError('required') && controls.firstName.touched">
+                      <span>
+                          First name is required.
+                      </span>
+                    </mat-error>
+                </td>
+            
+                <td class="col-sm-4" floatLabel="always">
+                    <mat-form-field>
+                        <mat-label>Last Name</mat-label>
+                        <input matInput placeholder="Last Name" autocomplete="off" [formControl]="controls.lastName" required>
+                      </mat-form-field>
+                      <mat-error class="employeeError" *ngIf="controls.lastName.hasError('required') && controls.lastName.touched">
+                          <span>
+                              Last name is required.
+                          </span>
+                        </mat-error>
+                </td>
+              
+                  <td class="col-sm-4" floatLabel="always">
+                    <mat-form-field>
+                      <mat-label>Gender</mat-label>
+                      <mat-select autocomplete="off" [formControl]="controls.gender"placeholder="Gender" required>
+                          <mat-option value="m">Male</mat-option>
+                          <mat-option value="f">Female</mat-option>
+                      </mat-select>
+                    </mat-form-field>
+                    <mat-error class="employeeError" *ngIf="controls.gender.hasError('required') && controls.gender.touched">
+                        <span>
+                            Gender is required.
+                        </span>
+                      </mat-error>
+                  </td>
+                </tr>
+              <tr>
+                  <td class="col-sm-auto" floatLabel="always">
+                    <mat-form-field>
+                      <mat-label>Date Of Birth</mat-label>
+                      <input  autocomplete="off" [formControl]="controls.dob"  matInput [matDatepicker]="picker" placeholder="Date of birth" required >
+                      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                      <mat-datepicker #picker></mat-datepicker>
+                    </mat-form-field>
+                    <mat-error class="employeeError" *ngIf="controls.dob.hasError('required') && controls.dob.touched">
+                        <span>
+                            Date of birth is required.
+                        </span>
+                      </mat-error>
+                  </td>
+              
+                  <td class="col-sm-4" floatLabel="always">
+                      <mat-form-field>
+                        <mat-label>Department</mat-label>
+                        <mat-select autocomplete="off" [formControl]="controls.department"placeholder="Department" required>
+                            <mat-option *ngFor="let department of departments" [value]=department.departmentId>{{department.departmentName}}</mat-option>
+                            <mat-option value="f">Female</mat-option>
+                        </mat-select>
+                      </mat-form-field>
+                      <mat-error class="employeeError" *ngIf="controls.department.hasError('required') && controls.department.touched">
+                          <span>
+                              Department is required.
+                          </span>
+                        </mat-error>
+                    </td>
+                  </tr>
+            </table>
+          </mat-tab>
+          <mat-tab label="Other Information" class="my-tab">
+            <table style="width: 100%" cellspacing="10">
+  
+            </table>
+          </mat-tab>
+        </mat-tab-group>
+  
+  
+      </form>
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-raised-button [disabled]="!employeeFormGroup.valid" (click)="onSubmit()" color="primary">Create</button>
+    </mat-card-actions>
+  </mat-card>
