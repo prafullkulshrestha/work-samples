@@ -13,8 +13,10 @@
 * The employees and departments tables are created under the employer schema, both the tables are seeded with some seed data in them.
 
 ## Assumptions
+* We don't need to implement any changes other than those specified in the requirements.
 * One department is associated with more than one employees
 * One employee is associated with one department only
+* Multiple records with the same firstName and lastName are allowed
 
 ## Prerequisite
 * Install Docker, I used version = 18.03.1-ce
@@ -92,3 +94,5 @@
 
 * The application configuration should be externalized either in configuration server or consul and vault.
 * Swagger configuration values should be externalized.
+* The backend validations should be enabled if this service is going to be shared by other clients also.
+* Caching can be enabled in the project
