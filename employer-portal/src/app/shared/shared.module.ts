@@ -34,6 +34,7 @@ import { MatButtonModule
 , MatSortModule
 , MatTableModule
 } from '@angular/material';
+import { FooterComponent } from './components/footer/footer.component';
 
 const MATERIAL_MODULES: any[] = [
 	MatButtonModule
@@ -76,11 +77,12 @@ const MATERIAL_MODULES: any[] = [
 	],
 	declarations: [
 
-	],
+	FooterComponent],
 	exports: [
 		CommonModule,
 		 ...MATERIAL_MODULES,
-		 MatSpinner
+		 MatSpinner,
+		 FooterComponent
 
 	],
 })

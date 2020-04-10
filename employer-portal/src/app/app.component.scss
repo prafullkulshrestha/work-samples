@@ -2,7 +2,6 @@
 .logo{
     width: 50px;
     height: 40px;
-    margin-top: 5px
 }
 
 .app-container {
@@ -11,9 +10,6 @@
     margin-right: 12%;
 	margin-bottom: 1%;
 }
-
-
-
 
 div {
     overflow: inherit;
@@ -39,19 +35,5 @@ button{
     padding: 0 14px;
   }
 
-.example-spacer {
-    margin-left: 5%;
-}
 
-.example-fill-remaining-space {
-    /* This fills the remaining space, by using flexbox. 
-       Every toolbar row uses a flexbox row layout. */
-    flex: 1 1 auto;
-
-  }
-
-  .mainc { 
-    display: flex; 
-  }
-  
   
