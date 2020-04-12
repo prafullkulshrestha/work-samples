@@ -7,5 +7,6 @@ public class EmployerApiApplicationConstants {
 	public static final String DEPARTMENT_NAME = "departmentName";
 	public static final String DEPARTMENT = "department";
 	public static final String CURRENT_AUDITOR = "Admin";
+	public static final String ASC = "1";
 
 }

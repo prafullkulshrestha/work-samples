@@ -32,6 +32,12 @@ public class Department extends BaseEntity {
 		this.departmentId = departmentId;
 	}
 
+	public Department(long departmentId, String departmentName, String description) {
+		this.departmentId = departmentId;
+		this.departmentName = departmentName;
+		this.description = description;
+	}
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "department_id", unique = true, nullable = false)

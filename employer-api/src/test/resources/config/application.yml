@@ -1,18 +1,18 @@
 server:
-    port: 8888
     servlet:
       context-path: /employer/api
 spring:
   jpa:
     properties:
       hibernate.jdbc.lob.non_contextual_creation: true
+      hibernate.dialect: org.hibernate.dialect.H2Dialect
     hibernate:
-      show-sql: true 
+      show-sql: false
   datasource:
-    url: jdbc:postgresql://localhost:5432/employer_api?currentSchema=employer
-    username: employer_user
-    password: testing
-    driver-class-name: org.postgresql.Driver
+    url: jdbc:h2:mem:test
+    username: sa
+    password: 
+    driver-class-name: org.h2.Driver
   jackson:
       serialization:
         write-dates-as-timestamps: false
@@ -23,7 +23,8 @@ logging:
     org.hibernate.type: info
     com.blueoptima: debug
     org.springframework.web.filter.CommonsRequestLoggingFilter: info
-  file: /tmp/config/logs/employer-api.log
+  file: /tmp/config/logs/test-employer-api.log
+
 
   
 

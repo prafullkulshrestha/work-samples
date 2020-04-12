@@ -36,7 +36,7 @@ VALUES (1, 'Human Resource', 'Human resource department', 'SEEDED_DURING_BUILD',
 INSERT INTO employer.departments (department_id, department_name, description, created_by, create_date, updated_by, last_update_date) 
 VALUES (2, 'Information Technology', 'Information technology department', 'SEEDED_DURING_BUILD', CURRENT_TIMESTAMP, 'SEEDED_DURING_BUILD', CURRENT_TIMESTAMP);
 INSERT INTO employer.departments (department_id, department_name, description, created_by, create_date, updated_by, last_update_date) 
-VALUES (3, 'Finance', 'Human resource department', 'SEEDED_DURING_BUILD', CURRENT_TIMESTAMP, 'SEEDED_DURING_BUILD', CURRENT_TIMESTAMP);
+VALUES (3, 'Finance', 'Finance department', 'SEEDED_DURING_BUILD', CURRENT_TIMESTAMP, 'SEEDED_DURING_BUILD', CURRENT_TIMESTAMP);
 
 
 INSERT INTO employer.employees (employee_id, department_id, first_name, last_name, gender, date_of_birth, created_by, create_date, updated_by, last_update_date) VALUES (1, 1, 'Alyson', 'Kelly', 'F', '1987-03-05', 'SEEDED_DURING_BUILD', CURRENT_TIMESTAMP, 'SEEDED_DURING_BUILD', CURRENT_TIMESTAMP);
