@@ -43,5 +43,15 @@
     "name": "emdm.application.rate.limit.minutely.limit",
     "type": "java.lang.String",
     "description": "A description for 'emdm.application.rate.limit.minutely.limit'"
+  },
+  {
+    "name": "spring.cloud.consul.config.format",
+    "type": "java.lang.String",
+    "description": "A description for 'spring.cloud.consul.config.format'"
+  },
+  {
+    "name": "spring.cloud.consul.config.format",
+    "type": "java.lang.String",
+    "description": "A description for 'spring.cloud.consul.config.format'"
   }
 ]}

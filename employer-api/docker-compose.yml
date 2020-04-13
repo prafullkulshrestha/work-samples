@@ -1,22 +1,21 @@
 version: '3.3'
 services:
-  postgres:
-    container_name: postgres
-    image: "postgres:9.6"
-    environment:
-      POSTGRES_PASSWORD: testing
-      POSTGRES_USER: employer_user
-    volumes:
-      - ./database/init.sql:/docker-entrypoint-initdb.d/init.sql
-    ports:
-      - "5432:5432"
   app:
     container_name: employer-api
+    environment:
+      SPRING_CLOUD_CONSUL_HOST: "consul"
+      SPRING_CLOUD_VAULT_HOST: "vault"
+      SPRING_CLOUD_VAULT_TOKEN: "myroot"
+    networks:
+      - config_default
+      - database_default
     build: .
-    depends_on:
-      - postgres
     ports:
       - "5555:8888"
-
 volumes:
   database:
+networks:
+  config_default:
+    external: true
+  database_default:
+    external: true

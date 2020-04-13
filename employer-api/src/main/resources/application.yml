@@ -6,16 +6,10 @@ spring:
   jpa:
     properties:
       hibernate.jdbc.lob.non_contextual_creation: true
-    hibernate:
-      show-sql: true 
-  datasource:
-    url: jdbc:postgresql://localhost:5432/employer_api?currentSchema=employer
-    username: employer_user
-    password: testing
-    driver-class-name: org.postgresql.Driver
   jackson:
       serialization:
         write-dates-as-timestamps: false
+  
 logging:
   level:
     root: info

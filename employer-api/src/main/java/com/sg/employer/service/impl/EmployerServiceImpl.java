@@ -92,7 +92,7 @@ public class EmployerServiceImpl implements EmployerService {
 	@Override
 	public List<DepartmentDto> getAllDepartments() {
 		List<DepartmentDto> departmentDtos = new ArrayList<>();
-		List<Department> departments = departmentDao.findAll();
+		List<Department> departments = departmentDao.findAll(Sort.by(EmployerApiApplicationConstants.DEPARTMENT_NAME).ascending());
 		if(CollectionUtils.isEmpty(departments)) {
 			log.debug("No departments found");
 			throw new NoDataFoundException("No departments found");

@@ -1,0 +1,21 @@
+spring:
+  application:
+    name: employer-api
+  cloud:
+    consul:
+      discovery:
+        hostname: localhost
+        port: 5555
+        healthCheckPath: /employer/api/actuator/health
+        healthCheckInterval: 5s
+      config:
+        format: KEY_VALUE
+      host: localhost
+      port: 8500
+    vault:
+      host: localhost
+      port: 8200
+      scheme: http
+      authentication: token
+      token: myroot
+      fail-fast: true
