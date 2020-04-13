@@ -1,0 +1,21 @@
+version: '3.3'
+services:
+  app:
+    container_name: employer-api
+    environment:
+      SPRING_CLOUD_CONSUL_HOST: "consul"
+      SPRING_CLOUD_VAULT_HOST: "vault"
+      SPRING_CLOUD_VAULT_TOKEN: "myroot"
+    networks:
+      - config_default
+      - database_default
+    build: .
+    ports:
+      - "5555:8888"
+volumes:
+  database:
+networks:
+  config_default:
+    external: true
+  database_default:
+    external: true

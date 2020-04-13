@@ -1,0 +1,10 @@
+spring:
+  application:
+    name: employer-api
+  cloud:
+    consul:
+      enabled: false
+      config:
+        enabled: false
+    vault:
+      enabled: false
