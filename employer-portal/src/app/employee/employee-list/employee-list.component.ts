@@ -22,7 +22,7 @@ export class EmployeeListComponent implements OnInit {
     pageNo: this.pageIndex,
     pageSize: this.pageSize,
     sortCriteria: {
-      firstName: true
+      firstName: false
     }
   }
 

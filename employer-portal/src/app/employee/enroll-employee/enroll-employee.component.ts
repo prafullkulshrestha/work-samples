@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { EmployerService } from '../../shared/services/employee.service';
-import { Employee } from '../../models/Employee';
 import {FormControl, Validators, FormGroup} from '@angular/forms';
 import { Department } from '../../models/Department';
 import * as moment from 'moment';
@@ -57,8 +56,12 @@ export class EnrollEmployeeComponent implements OnInit {
     config.horizontalPosition = this.horizontalPosition;
     config.duration = 2000;
       this.snackBar.open('Record saved successfully!', undefined, config);
-      this.employeeFormGroup.reset();
+      this.reset();
       }, error => console.log(error));
+  }
+
+  reset() {
+    this.employeeFormGroup.reset();
   }
 
   onSubmit() {

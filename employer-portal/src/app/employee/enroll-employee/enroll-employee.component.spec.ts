@@ -173,7 +173,24 @@ describe('EnrollEmployeeComponent', () => {
 
   it('should contain a create button', () => {
     const compiled: HTMLElement = fixture.debugElement.nativeElement;
-    expect(compiled.querySelector('button').textContent).toContain('Create');
+    expect(compiled.querySelectorAll('button')[0].textContent).toContain('Create');
   });
+
+  it('should contain a reset button', () => {
+    const compiled: HTMLElement = fixture.debugElement.nativeElement;
+    expect(compiled.querySelectorAll('button')[1].textContent).toContain('Reset');
+  });
+
+  it('should have called the reset after changing the form values and if clicked', fakeAsync(() => {
+    const compiled: HTMLElement = fixture.debugElement.nativeElement;
+    component.ngOnInit();
+    const employeeFormGroup = fixture.debugElement.componentInstance.employeeFormGroup;
+    employeeFormGroup.controls['firstName'].setValue("testFirstName");
+    spyOn(employeeFormGroup, 'reset');
+    compiled.querySelectorAll('button')[1].click();
+    fixture.detectChanges();
+    tick(1000);
+    expect(employeeFormGroup.reset).toHaveBeenCalled();
+  }));
 
 });
