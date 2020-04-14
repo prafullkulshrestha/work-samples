@@ -130,3 +130,7 @@ $base-color: map-get($md-employer, 500);
         font-size: 100;
         -webkit-overflow-scrolling: touch;
     } 
+
+    .mat-form-field {
+        width: 100%;
+      }

@@ -146,9 +146,9 @@ describe('EmployeeListComponent', () => {
 
   }));
 
-  it('should contain 4 child nodes under mat-card', () => {
+  it('should contain 3 child node under mat-card', () => {
     const compiled: HTMLElement = fixture.debugElement.nativeElement;
-    expect(compiled.querySelector('mat-card').childNodes.length).toEqual(4);
+    expect(compiled.querySelector('mat-card').childNodes.length).toEqual(3);
   });
 
   it('should contain mat-table child node', () => {

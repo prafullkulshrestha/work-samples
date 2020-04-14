@@ -1,12 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { EmployerService } from '../../shared/services/employee.service';
-import {FormControl, Validators, FormGroup} from '@angular/forms';
+import {FormControl, Validators, FormGroup, NgForm} from '@angular/forms';
 import { Department } from '../../models/Department';
 import * as moment from 'moment';
 import {MatSnackBar, MatSnackBarConfig,
   MatSnackBarHorizontalPosition,
   MatSnackBarVerticalPosition} from '@angular/material';
-import { error } from '../../../../node_modules/protractor';
 
 @Component({
   selector: 'app-enroll-employee',
@@ -56,7 +55,6 @@ export class EnrollEmployeeComponent implements OnInit {
     config.horizontalPosition = this.horizontalPosition;
     config.duration = 2000;
       this.snackBar.open('Record saved successfully!', undefined, config);
-      this.reset();
       }, error => console.log(error));
   }
 
@@ -64,8 +62,12 @@ export class EnrollEmployeeComponent implements OnInit {
     this.employeeFormGroup.reset();
   }
 
-  onSubmit() {
+  onSubmit(form? : NgForm) {
     this.save();
+    if(form) {
+      form.resetForm();
+    }
+    this.employeeFormGroup.reset();
   }
 
 }
