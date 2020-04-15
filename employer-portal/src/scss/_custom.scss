@@ -80,10 +80,6 @@ $base-color: map-get($md-employer, 500);
 
 }
 
-    .mat-cell {
-        word-break: break-word;
-    }
-
     .mat-calendar-header {
         background: $base-color;
     }
@@ -105,15 +101,6 @@ $base-color: map-get($md-employer, 500);
     .mat-row:hover {
         background: #d2e5ca;
       }
-      .mat-snack-bar-container{
-        background: $base-color;
-        color:rgba(0, 0, 0, 0.87);
-        align-content: center;
-        span {
-            width: 100%;
-            text-align: center;
-        }
-      }
 
       .mat-toolbar{
         height: 10vh;
@@ -134,3 +121,25 @@ $base-color: map-get($md-employer, 500);
     .mat-form-field {
         width: 100%;
       }
+    .mat-radio-group {
+        width: 100%;
+    }
+   
+
+      .mat-snack-bar-container {
+        background: $base-color;
+        border-radius: 4px;
+        box-sizing: border-box;
+        display: block;
+        margin: 24px;
+        max-width: 33vw;
+        min-width: 344px;
+        padding: 14px 16px;
+        min-height: 48px;
+        transform-origin: center;
+        align-content: center;
+        span {
+            width: 100%;
+            text-align: center;
+        }
+    }

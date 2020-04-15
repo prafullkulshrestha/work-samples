@@ -11,39 +11,14 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import 'hammerjs';
 import { Department } from '../../models/Department';
 import { throwError } from 'rxjs'; 
+import * as moment from 'moment';
 
 describe('EnrollEmployeeComponent', () => {
   let component: EnrollEmployeeComponent;
   let fixture: ComponentFixture<EnrollEmployeeComponent>;
   let originalTimeout;
-  const data = {
-       id: 100,
-       firstName: 'Prafull',
-       lastName: 'Kulshrestha',
-       gender: 'Male',
-       dateOfBirth: '1982-07-07',
-       department: {
-         departmentId: 101,
-         departmentName: 'IT'
-       }
-      };
-  const departments : Department []= [
-    {
-      departmentId: 120,
-      departmentName: 'HR',
-      description: 'HR Department'
-    },
-    {
-      departmentId: 121,
-      departmentName: 'IT',
-      description: 'IT Department'
-    },
-    {
-      departmentId: 122,
-      departmentName: 'Finance',
-      description: 'Finance Department'
-    }
-  ]; 
+  let  data: any;
+  let departments : Department [];
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -63,6 +38,34 @@ describe('EnrollEmployeeComponent', () => {
     component = fixture.debugElement.componentInstance;
     originalTimeout = jasmine.DEFAULT_TIMEOUT_INTERVAL;
     jasmine.DEFAULT_TIMEOUT_INTERVAL = 1000000;
+    data = {
+      id: 100,
+      firstName: 'Prafull',
+      lastName: 'Kulshrestha',
+      gender: 'Male',
+      dateOfBirth: '1982-07-07',
+      department: {
+        departmentId: 101,
+        departmentName: 'IT'
+      }
+     };
+    departments = [
+      {
+        departmentId: 120,
+        departmentName: 'HR',
+        description: 'HR Department'
+      },
+      {
+        departmentId: 121,
+        departmentName: 'IT',
+        description: 'IT Department'
+      },
+      {
+        departmentId: 122,
+        departmentName: 'Finance',
+        description: 'Finance Department'
+      }
+    ]; 
   });
 
   afterEach(function() {
@@ -192,13 +195,28 @@ describe('EnrollEmployeeComponent', () => {
 
   it('should have called the reset after changing the form values and if clicked', async(() => {
     fixture.detectChanges();
-    const compiled: HTMLElement = fixture.debugElement.nativeElement;
     component.ngOnInit();
     const employeeFormGroup = component.employeeFormGroup;
     employeeFormGroup.controls['firstName'].setValue("testFirstName");
     component.reset();
     fixture.detectChanges();
     expect(employeeFormGroup.controls['firstName'].value).toBeNull();
+  }));
+
+  it('should raise a validation error when input dob leaves an emplyee age < 18 and > 60 ', async(() => {
+    fixture.detectChanges();
+    var dobElement = component.employeeFormGroup.controls['dateOfBirth'];
+    dobElement.setValue(new Date());
+    fixture.detectChanges();
+    expect(dobElement.errors.dateRangeError).toEqual(true);
+  }));
+
+  it('should not raise a validation error when input dob leaves an emplyee age > 18 and < 60 ', async(() => {
+    fixture.detectChanges();
+    var dobElement = component.employeeFormGroup.controls['dateOfBirth'];
+    dobElement.setValue(moment(new Date()).subtract(19, 'years'));
+    fixture.detectChanges();
+    expect(dobElement.errors.dateRangeError).toBeUndefined();
   }));
 
 });
