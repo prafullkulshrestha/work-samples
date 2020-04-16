@@ -115,12 +115,18 @@ describe('EnrollEmployeeComponent', () => {
 
   it('should not return saved employee if failed when called service method asynchronously', fakeAsync(() => {
     const employeeService = fixture.debugElement.injector.get(EmployerService);
-    spyOn(employeeService, 'getEmployeesList').and.returnValue(throwError(new Error('Test error')));
-    component.ngOnInit();
+    spyOn(employeeService, 'createEmployee').and.returnValue(throwError(new Error('Test error')));
+    component.save();
     fixture.detectChanges();
     tick();
     expect(component.employee)
       .toBeUndefined();
+
+      expect(component.errorSavingEmployee)
+      .toEqual(true);
+  
+      expect(component.errorMessageSavingEmployee)
+      .toEqual('Unknown error occurred');
     
   }));
 
@@ -154,6 +160,11 @@ describe('EnrollEmployeeComponent', () => {
       fixture.detectChanges();
       tick(10000);
       expect(component.departments).toEqual(departments);
+      expect(component.errorLoadingDepartments)
+      .toEqual(false);
+  
+      expect(component.errorMessageLoadingDepartments)
+      .toBe('');
   }));
 
   it('should not return departments if failed when called service method asynchronously', fakeAsync(() => {
@@ -163,6 +174,11 @@ describe('EnrollEmployeeComponent', () => {
       fixture.detectChanges();
       tick(10000);
       expect(component.departments).toBeUndefined();
+      expect(component.errorLoadingDepartments)
+      .toEqual(true);
+  
+      expect(component.errorMessageLoadingDepartments)
+      .toEqual('Unknown error occurred');
   }));
 
   it('should submit employee details if called on the enroll employee form', fakeAsync(() => {
@@ -172,6 +188,11 @@ describe('EnrollEmployeeComponent', () => {
       fixture.detectChanges();
       tick(10000);
       expect(component.save).toHaveBeenCalledTimes(1);
+      expect(component.errorSavingEmployee)
+      .toEqual(false);
+  
+      expect(component.errorMessageSavingEmployee)
+      .toBeUndefined();
   }));
 
   it('should contain "Enroll New Employee"', () => {

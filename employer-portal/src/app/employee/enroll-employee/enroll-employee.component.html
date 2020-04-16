@@ -3,7 +3,7 @@
     <mat-card-title>Enroll New Employee</mat-card-title>
   </mat-card-header>
   <mat-card-content>
-    <div class="container py-5">
+    <div *ngIf="!errorLoadingDepartments" class="container py-5">
       <div class="row">
         <div class="col-md-11 mx-auto">
           <form (ngSubmit)="onSubmit()" novalidate [formGroup]="employeeFormGroup">
@@ -49,12 +49,12 @@
                       <input autocomplete="off" readonly [min]="minDate" [max]="maxDate" formControlName="dateOfBirth" matInput [matDatepicker]="picker" placeholder="Date of birth">
                       <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                       <mat-datepicker #picker></mat-datepicker>
-                       <mat-error class="employeeError" *ngIf="employeeFormGroup.get('dateOfBirth')?.errors?.required">
+                       <mat-error  *ngIf="employeeFormGroup.get('dateOfBirth')?.errors?.required">
                           <span>
                             Date of birth is required.
                           </span>
                         </mat-error>
-                        <mat-error class="employeeError" *ngIf="employeeFormGroup.get('dateOfBirth')?.errors?.dateRangeError">
+                        <mat-error  *ngIf="employeeFormGroup.get('dateOfBirth')?.errors?.dateRangeError">
                           <span>
                             Employee's age should be between 18 and 60 as of today
                           </span>
@@ -67,7 +67,7 @@
                         <mat-select autocomplete="off" formControlName="departmentId" placeholder="Department">
                           <mat-option *ngFor="let department of departments" [value]=department.departmentId>{{department.departmentName}}</mat-option>
                         </mat-select>
-                        <mat-error class="employeeError" *ngIf="employeeFormGroup.get('department').get('departmentId')?.errors?.required">
+                        <mat-error  *ngIf="employeeFormGroup.get('department').get('departmentId')?.errors?.required">
                           <span>
                             Department is required.
                           </span>
@@ -97,11 +97,20 @@
               <button mat-raised-button [disabled]="!employeeFormGroup.valid" (click)="onSubmit()" color="primary" class="float-left mr-3 mb-2">Create</button>
               <button mat-raised-button [disabled]="!employeeFormGroup.touched" (click)="reset()" class="mb-2" color="primary">Reset</button>
             </div>
+            <div class="text-center" *ngIf="errorSavingEmployee">
+                <mat-error class="employee-error">
+                    {{errorMessageSavingEmployee}}
+                </mat-error>
+            </div>
           </form>
         </div>
       </div>
     </div>
-
+    <div class="text-center" *ngIf="errorLoadingDepartments">
+        <mat-error class="employee-error">
+            {{errorMessageLoadingDepartments}}
+          </mat-error>
+    </div>
 
 
   </mat-card-content>
