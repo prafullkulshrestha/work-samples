@@ -59,7 +59,7 @@ export class EnrollEmployeeComponent implements OnInit {
         let config = new MatSnackBarConfig();
     config.verticalPosition = this.verticalPosition;
     config.horizontalPosition = this.horizontalPosition;
-    config.duration = 2000;
+    config.duration = 522000;
     this.snackBar.open('Record saved successfully!', undefined, config);
       }, error => console.log(error));
   }

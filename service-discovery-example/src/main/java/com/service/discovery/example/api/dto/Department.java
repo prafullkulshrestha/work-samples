@@ -1,26 +1,17 @@
-package com.sg.employer.entity;
+package com.service.discovery.example.api.dto;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
-
-import org.apache.commons.lang3.builder.EqualsBuilder;
-import org.apache.commons.lang3.builder.HashCodeBuilder;
-import org.apache.commons.lang3.builder.ToStringBuilder;
-import org.apache.commons.lang3.builder.ToStringStyle;
+import org.apache.commons.lang.builder.EqualsBuilder;
+import org.apache.commons.lang.builder.HashCodeBuilder;
+import org.apache.commons.lang.builder.ToStringBuilder;
+import org.apache.commons.lang.builder.ToStringStyle;
 
 /**
  * @author prafullkulshrestha
  *
  */
-@Entity
-@Table(name = "departments")
-public class Department extends BaseEntity {
 
-	private static final long serialVersionUID = -6912422684240024345L;
+public class Department {
+
 	private long departmentId;
 	private String description;
 	private String departmentName;
@@ -38,9 +29,7 @@ public class Department extends BaseEntity {
 		this.description = description;
 	}
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "department_id", unique = true, nullable = false)
+	
 	public long getDepartmentId() {
 		return this.departmentId;
 	}
@@ -49,7 +38,6 @@ public class Department extends BaseEntity {
 		this.departmentId = departmentId;
 	}
 
-	@Column(name = "department_name", length = 100)
 	public String getDepartmentName() {
 		return departmentName;
 	}
@@ -58,7 +46,6 @@ public class Department extends BaseEntity {
 		this.departmentName = departmentName;
 	}
 
-	@Column(name = "description", length = 500)
 	public String getDescription() {
 		return this.description;
 	}

@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  defaultEmployerServiceUrl: 'http://localhost:5555/employer/api/'
+  defaultEmployerServiceUrl: 'http://localhost:8888/employer/api/'
 };

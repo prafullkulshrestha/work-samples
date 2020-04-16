@@ -1,7 +1,7 @@
 version: '3.3'
 services:
   app:
-    container_name: employer-api
+    container_name: discovery-client-api
     environment:
       SPRING_CLOUD_CONSUL_HOST: "consul"
       SPRING_CLOUD_VAULT_HOST: "vault"
@@ -10,7 +10,7 @@ services:
       - config_default
     build: .
     ports:
-      - "8888:8888"
+      - "8889:8889"
 volumes:
   database:
 networks:
