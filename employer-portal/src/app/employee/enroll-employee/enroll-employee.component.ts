@@ -71,6 +71,7 @@ export class EnrollEmployeeComponent implements OnInit, OnDestroy {
   save() {
     let dob: string = moment(this.employeeFormGroup.get('dateOfBirth').value).format('YYYY-MM-DD');
     let employee: any = this.employeeFormGroup.value;
+    employee.gender = (employee.gender === 1)? 'M':'F';
     employee.dateOfBirth = dob;
     this.errorSavingEmployee = false;
     this.errorMessageSavingEmployee = '';

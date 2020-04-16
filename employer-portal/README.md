@@ -4,6 +4,7 @@
 * The project can be developed in local environment and also can be containerized and deployed using docker
 * the project can run under different profiles under the local and docker(`ng serve --prod` or change build-prod parameter in the package.json for runing on docker)
 * `About` and `Logout` links are not functional on UI and can be implemented in future.
+* The employee list grid is sortable on each and every column. Its default sorting is on first name.
 
 ## Nginx server
 
