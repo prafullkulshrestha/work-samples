@@ -1,0 +1,145 @@
+@import '~@angular/material/theming';
+
+
+// Custom typography for theme
+$general-typography: mat-typography-config(
+  $font-family: 'HCo Gotham SSm, Arial, Helvetica, sans-serif',
+  $body-2: mat-typography-level(12px, 24px, 600)
+);
+
+$secondary-typography: mat-typography-config(
+  $font-family: 'HCo Gotham SSm, Arial, Helvetica, sans-serif'
+);
+
+// Include the common styles for Angular Material. We include this here so that you only
+// have to load a single css file for Angular Material in your app.
+// Be sure that you only ever include this mixin once!
+@include mat-core($general-typography);
+
+$md-employer: (
+    50 : #edf5ea,
+    100 : #d2e5ca,
+    200 : #b5d4a7,
+    300 : #97c284,
+    400 : #80b569,
+    500 : #6aa84f,
+    600 : #62a048,
+    700 : #57973f,
+    800 : #4d8d36,
+    900 : #3c7d26,
+    A100 : #cdffbe,
+    A200 : #a6ff8b,
+    A400 : #7fff58,
+    A700 : #6cff3f,
+    contrast: (
+        50 : #000000,
+        100 : #000000,
+        200 : #000000,
+        300 : #000000,
+        400 : #000000,
+        500 : #000000,
+        600 : #000000,
+        700 : #ffffff,
+        800 : #ffffff,
+        900 : #ffffff,
+        A100 : #000000,
+        A200 : #000000,
+        A400 : #000000,
+        A700 : #000000,
+    )
+);
+
+// Define the palettes for your theme using the Material Design palettes available in palette.scss
+// (imported above). For each palette, you can optionally specify a default, lighter, and darker
+// hue.
+$primary: mat-palette($md-employer);
+$accent:  mat-palette($mat-light-blue, 600, 300, 600);
+$warn:    mat-palette($mat-deep-orange, 300, 500, 800);
+
+//Just so we can see a background color
+html, body { height: 100%; background-color:#ffffff }
+
+$base-color: map-get($md-employer, 500);
+
+.mat-card {
+    padding: 0%;
+    .mat-card-header {
+        background: $base-color;
+        height: 30%;
+       
+    
+        .mat-card-title {
+            margin-top: 5%; 
+        }
+    }
+
+    .mat-paginator {
+        background: $base-color;
+        height: 20%;
+    }
+
+}
+
+    .mat-calendar-header {
+        background: $base-color;
+    }
+
+    .mat-select { 
+        display: unset; 
+        margin-top: 0.75em;
+    }
+    input.mat-input-element {
+        margin-top: 0.75em;
+    }
+    .mat-sort-header-container {
+        display: flex;
+        cursor: pointer;
+        align-items: center;
+        
+    }
+
+    .mat-row:hover {
+        background: #d2e5ca;
+      }
+
+      .mat-toolbar{
+        height: 10vh;
+      }
+
+      .mat-toolbar-single-row{
+        padding-left: 50%
+    }
+    .mat-drawer-inner-container {
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+        background: $base-color;
+        font-size: 100;
+        -webkit-overflow-scrolling: touch;
+    } 
+
+    .mat-form-field {
+        width: 100%;
+      }
+    .mat-radio-group {
+        width: 100%;
+    }
+   
+
+      .mat-snack-bar-container {
+        background: $base-color;
+        border-radius: 4px;
+        box-sizing: border-box;
+        display: block;
+        margin: 24px;
+        max-width: 33vw;
+        min-width: 344px;
+        padding: 14px 16px;
+        min-height: 48px;
+        transform-origin: center;
+        align-content: center;
+        span {
+            width: 100%;
+            text-align: center;
+        }
+    }

@@ -1,0 +1,47 @@
+<div>
+<mat-toolbar color="primary">
+  
+    <div fxShow="true" fxHide.gt-xs="true">
+      <button mat-icon-button (click)="sidenav.toggle()">
+        <mat-icon>menu</mat-icon>
+      </button>
+    </div>
+    
+    <div fxLayout="row" fxFlex="100" >
+        <div fxFlexAlign="center" fxHide.lt-sm="true"><img  src="./assets/logo.png"  class="logo"></div>
+        <div fxFlex="10"></div>
+          <div fxFlex="20" fxFlexAlign="center" fxShow="true" fxHide.lt-sm="true" >
+          <a  mat-button  routerLink="/add">About</a>
+          <a  mat-button style="white-space: nowrap" routerLink="/add" routerLinkActive="active">Enroll Employee</a>
+          <a  mat-button  style="white-space: nowrap" routerLink="/employees">Employee List</a>
+        </div>
+
+        <div fxFlex="60" fxHide.lt-sm="true"></div>
+        <div fxFlex="auto" fxHide.lt-sm="true" fxFlexAlign="center">
+            <a  mat-button  routerLink="/add">Logout</a>
+        </div> 
+       
+  </div>
+  </mat-toolbar>
+  <mat-sidenav-container fxFlexFill >
+    <mat-sidenav color="primary" #sidenav fxLayout="column" mode="over"  opened="false" fxHide.gt-sm="true">
+      <div fxLayout="column">
+          <a  mat-button  routerLink="/add">About</a>
+        <a  mat-button  routerLink="/add" routerLinkActive="active">Enroll Employee</a>
+        <a  mat-button  routerLink="/employees">Employee List</a>
+        <a  mat-button  routerLink="/add">Logout</a>
+      </div>
+    </mat-sidenav>
+    <mat-sidenav-content fxFlexFill>
+        <main class="app-container">
+            <router-outlet  style="margin-top: 80px;"></router-outlet>
+          </main>
+          <app-footer></app-footer>
+      </mat-sidenav-content>
+  </mat-sidenav-container>
+</div>
+
+
+
+
+  

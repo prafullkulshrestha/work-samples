@@ -1,0 +1,19 @@
+version: '3.3'
+services:
+  app:
+    container_name: discovery-client-api
+    environment:
+      SPRING_CLOUD_CONSUL_HOST: "consul"
+      SPRING_CLOUD_VAULT_HOST: "vault"
+      SPRING_CLOUD_VAULT_TOKEN: "myroot"
+    networks:
+      - config_default
+    build: .
+    ports:
+      - "8889:8889"
+volumes:
+  database:
+networks:
+  config_default:
+    external:
+      name: config_default

@@ -1,0 +1,30 @@
+server:
+    servlet:
+      context-path: /employer/api
+spring:
+  jpa:
+    properties:
+      hibernate.jdbc.lob.non_contextual_creation: true
+      hibernate.dialect: org.hibernate.dialect.H2Dialect
+    hibernate:
+      show-sql: false
+  datasource:
+    url: jdbc:h2:mem:test
+    username: sa
+    password: 
+    driver-class-name: org.h2.Driver
+  jackson:
+      serialization:
+        write-dates-as-timestamps: false
+logging:
+  level:
+    root: info
+    org.hibernate.SQL: info
+    org.hibernate.type: info
+    com.blueoptima: debug
+    org.springframework.web.filter.CommonsRequestLoggingFilter: info
+  file: /tmp/config/logs/test-employer-api.log
+
+
+  
+

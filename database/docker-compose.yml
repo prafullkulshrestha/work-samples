@@ -1,0 +1,18 @@
+version: '3'
+services:
+  postgres:
+    container_name: postgres
+    image: "postgres:9.6"
+    networks:
+      - config_default
+    environment:
+      POSTGRES_PASSWORD: testing
+      POSTGRES_USER: employer_user
+    volumes:
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+    ports:
+      - "5432:5432"
+networks:
+  config_default:
+    external:
+      name: config_default

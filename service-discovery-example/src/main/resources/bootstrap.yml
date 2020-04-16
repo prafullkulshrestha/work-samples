@@ -1,0 +1,16 @@
+spring:
+  application:
+    name: discovery-client-api
+  cloud:
+    consul:
+      discovery:
+        hostname: discovery-client-api
+        port: 8889
+        healthCheckPath: /discovery-client/api/actuator/health
+        healthCheckInterval: 5s
+      config:
+        format: KEY_VALUE
+      host: localhost
+      port: 8500
+    vault:
+      enabled: false

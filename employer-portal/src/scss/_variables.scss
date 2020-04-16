@@ -1,0 +1,11 @@
+@import "custom"; 
+//@import "../../node_modules/bootstrap/dist/css/bootstrap.min.css";
+//Here we importing _custom.scss file but we don't need to include underscore.
+$sample-app-theme:   mat-light-theme($primary,$accent,$warn);
+$background: map-get($sample-app-theme, background);
+//$bg-color: #32941c;
+//$background: map_merge($background, (background: $bg-color, mat-paginator: $bg-color, dialog:$bg-color));
+
+$theme: map_merge($sample-app-theme, (background: $background));
+@include angular-material-theme($theme);
+@include mat-paginator-theme($theme);
