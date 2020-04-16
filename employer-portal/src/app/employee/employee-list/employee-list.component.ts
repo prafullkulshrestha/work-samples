@@ -1,23 +1,26 @@
-import { Observable, of } from 'rxjs';
 import { EmployerService } from '../../shared/services/employee.service';
 import { Employee } from '../../models/Employee';
-import { Component, OnInit, ViewChild} from '@angular/core';
-import {MatTableDataSource, MatPaginator, MatSort, MatSnackBar, Sort} from '@angular/material';
+import { Component, OnInit, ViewChild, OnDestroy } from '@angular/core';
+import { MatTableDataSource, MatPaginator, MatSort, MatSnackBar, Sort } from '@angular/material';
+import { takeUntil } from 'rxjs/operators';
+import { Subject } from "rxjs";
 @Component({
   selector: 'app-employee-list',
   templateUrl: './employee-list.component.html',
   styleUrls: ['./employee-list.component.scss']
 })
-export class EmployeeListComponent implements OnInit {
+export class EmployeeListComponent implements OnInit, OnDestroy {
 
-  employees: Employee [];
-  loading  =  true;
+  employees: Employee[];
+  loading = true;
   dataSource = new MatTableDataSource<Employee>(this.employees);
   displayedColumns = ['firstName', 'lastName', 'gender', 'dateOfBirth', 'department'];
   pageSize = 5;
   pageIndex = 0;
   totalCount: number = 0;
-
+  private destroy$: Subject<boolean> = new Subject<boolean>();
+  errorLoadingEmployees: boolean = false;
+  errorMessageLoadingEmployees: string;
   searchAndSortCriteria: any = {
     pageNo: this.pageIndex,
     pageSize: this.pageSize,
@@ -26,10 +29,10 @@ export class EmployeeListComponent implements OnInit {
     }
   }
 
-  constructor(private employeeService: EmployerService, public snackBar: MatSnackBar) {}
+  constructor(private employeeService: EmployerService, public snackBar: MatSnackBar) { }
 
   ngOnInit() {
-      this.loadData();
+    this.loadData();
   }
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -44,9 +47,11 @@ export class EmployeeListComponent implements OnInit {
 
   loadData() {
     this.loading = true;
+    this.errorLoadingEmployees = false;
+    this.errorMessageLoadingEmployees = '';
     this.employees = [];
-    this.employeeService.getEmployeesList(this.searchAndSortCriteria).subscribe((response: any) => {
-       response.employeeList.forEach(e => this.employees.push(
+    this.employeeService.getEmployeesList(this.searchAndSortCriteria).pipe(takeUntil(this.destroy$)).subscribe((response: any) => {
+      response.employeeList.forEach(e => this.employees.push(
         {
           id: e.employeeId,
           firstName: e.firstName,
@@ -61,10 +66,21 @@ export class EmployeeListComponent implements OnInit {
       this.dataSource = new MatTableDataSource<Employee>(this.employees);
       this.loading = false;
     },
-  (error)=> {
-    console.error(error);
-    this.loading = false;
-  });
+      (error) => {
+        console.error(error);
+        this.loading = false;
+        this.errorLoadingEmployees = true;
+					if (error.status == 404){
+						this.errorMessageLoadingEmployees = 'No employees found. Please update criteria and try again.';
+					}
+					else if (error.status == 500)
+                    {
+						this.errorMessageLoadingEmployees = 'Error occurred loading the empoyees. Please try again';
+          }
+          else {
+            this.errorMessageLoadingEmployees = 'Unknown error occurred'
+          }
+      });
 
   }
 
@@ -72,7 +88,7 @@ export class EmployeeListComponent implements OnInit {
     this.searchAndSortCriteria.pageNo = e.pageIndex;
     this.searchAndSortCriteria.pageSize = e.pageSize;
     this.loadData();
-	}
+  }
 
   public onSortData(sort: Sort): void {
     this.searchAndSortCriteria.sortCriteria = {};
@@ -80,6 +96,11 @@ export class EmployeeListComponent implements OnInit {
     let direction: string = sort.direction;
     this.searchAndSortCriteria.sortCriteria[active] = (direction !== 'asc')
     this.loadData();
+  }
+
+  ngOnDestroy() {
+    this.destroy$.next();
+    this.destroy$.unsubscribe();
   }
 
 }
