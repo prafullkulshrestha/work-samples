@@ -3,7 +3,7 @@
     <mat-card-title>View All Employees</mat-card-title>
   </mat-card-header>
   <mat-spinner [style.display]="loading ? 'block' : 'none'" class="spinner-position" mode="indeterminate"></mat-spinner>
-  <div class="container py-5">
+  <div class="container py-5" *ngIf="!errorLoadingEmployees">
     <mat-table matSortActive="firstName" matSortDirection="asc" [style.display]="loading === false ? 'block' : 'none'" #table
       [dataSource]="dataSource" matSort (matSortChange)="onSortData($event)">
       <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
@@ -38,5 +38,10 @@
     </mat-table>
     <mat-paginator #paginator [style.display]="loading === false ? 'block' : 'none'" [length]="totalCount" [pageSizeOptions]="[5, 10, 25, 100]"
       [pageSize]="pageSize" (page)="onPageChanged($event)"></mat-paginator>
+  </div>
+  <div class="text-center" *ngIf="errorLoadingEmployees">
+      <mat-error class="employee-error">
+          {{errorMessageLoadingEmployees}}
+        </mat-error>
   </div>
 </mat-card>

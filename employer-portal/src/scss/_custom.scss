@@ -143,3 +143,8 @@ $base-color: map-get($md-employer, 500);
             text-align: center;
         }
     }
+
+    .employee-error {
+    font-size: 1rem;
+    font-weight: 400;
+    }

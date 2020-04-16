@@ -119,6 +119,12 @@ describe('EmployeeListComponent', () => {
     expect(component.dataSource.data)
       .toEqual(employeeData);
 
+      expect(component.errorLoadingEmployees)
+      .toEqual(false);
+  
+      expect(component.errorMessageLoadingEmployees)
+      .toBe('');
+
   }));
 
   it('should not fetch data if failed when called service method asynchronously', fakeAsync(() => {
@@ -129,6 +135,12 @@ describe('EmployeeListComponent', () => {
     tick();
     expect(component.employees.length)
       .toEqual(0);
+
+    expect(component.errorLoadingEmployees)
+    .toEqual(true);
+
+    expect(component.errorMessageLoadingEmployees)
+    .toEqual('Unknown error occurred');
     
     expect(component.totalCount)
       .toEqual(0);
@@ -143,7 +155,7 @@ describe('EmployeeListComponent', () => {
 
   it('should contain 3 child node under mat-card', () => {
     const compiled: HTMLElement = fixture.debugElement.nativeElement;
-    expect(compiled.querySelector('mat-card').childNodes.length).toEqual(3);
+    expect(compiled.querySelector('mat-card').childNodes.length).toEqual(4);
   });
 
   it('should contain mat-table child node', () => {
@@ -156,9 +168,9 @@ describe('EmployeeListComponent', () => {
     expect(compiled.querySelector('mat-card').querySelector('mat-paginator')).toBeDefined();
   });
 
-  it('should contain child nodes under mat-table', () => {
+  it('without loading employees the mat-table should be null', () => {
     const compiled: HTMLElement = fixture.debugElement.nativeElement;
-    expect(compiled.querySelector('mat-table').childNodes.length).toBeGreaterThanOrEqual(1);
+    expect(compiled.querySelector('mat-table')).toBeNull();
   });
 
   it('should contain "View All Employees"', () => {
