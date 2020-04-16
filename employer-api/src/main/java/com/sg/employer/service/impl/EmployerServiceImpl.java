@@ -40,15 +40,19 @@ public class EmployerServiceImpl implements EmployerService {
 	private Logger log = LoggerFactory.getLogger(getClass());
 	private EmployeeDao employeeDao;
 	private DepartmentDao departmentDao;
-	
+
 	@Autowired
 	public EmployerServiceImpl(EmployeeDao employeeDao, DepartmentDao departmentDao) {
 		this.employeeDao = employeeDao;
 		this.departmentDao = departmentDao;
 	}
 
-	/* (non-Javadoc)
-	 * @see com.sg.employer.service.EmployerService#saveEmployee(com.sg.employer.dto.EmployeeDto)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * com.sg.employer.service.EmployerService#saveEmployee(com.sg.employer.dto.
+	 * EmployeeDto)
 	 */
 	@Override
 	public EmployeeDto createEmployee(EmployeeDto employeeDto) {
@@ -57,9 +61,12 @@ public class EmployerServiceImpl implements EmployerService {
 		log.debug("Service reuest received to create the employee {} completed", employeeRes);
 		return new EmployeeDto(employeeRes);
 	}
-	
-	/* (non-Javadoc)
-	 * @see com.sg.employer.service.EmployerService#getEmployeesByCriteria(com.sg.employer.dto.SearchAndSortCriteriaReqDto)
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see com.sg.employer.service.EmployerService#getEmployeesByCriteria(com.sg.
+	 * employer.dto.SearchAndSortCriteriaReqDto)
 	 */
 	@Override
 	public EmployeeListDto getEmployeesByCriteria(SearchAndSortCriteriaReqDto searchAndSortCriteriaReqDto)
@@ -68,13 +75,15 @@ public class EmployerServiceImpl implements EmployerService {
 		int pageNo = searchAndSortCriteriaReqDto.getPageNo();
 		int pageSize = searchAndSortCriteriaReqDto.getPageSize();
 		Map<String, Boolean> sortCriteria = searchAndSortCriteriaReqDto.getSortCriteria();
-		
+
 		String sortKey = sortCriteria.keySet().toArray()[0].toString();
 		Boolean sortValue = sortCriteria.get(sortKey);
+		sortKey = (sortKey.equalsIgnoreCase(EmployerApiApplicationConstants.DEPARTMENT))
+				? EmployerApiApplicationConstants.DEPARTMENT + "." + EmployerApiApplicationConstants.DEPARTMENT_NAME
+				: sortKey;
 		Sort sort = (!sortValue) ? Sort.by(sortKey).ascending() : Sort.by(sortKey).descending();
-		Pageable allEmployeeSortedBySortKeyPageable = 
-				  PageRequest.of(pageNo, pageSize, sort);
-		
+		Pageable allEmployeeSortedBySortKeyPageable = PageRequest.of(pageNo, pageSize, sort);
+
 		Page<Employee> employeesPage = employeeDao.findAll(allEmployeeSortedBySortKeyPageable);
 		long totalCount = employeesPage.getTotalElements();
 		List<EmployeeDto> employeeDtos = new ArrayList<>();
@@ -86,14 +95,17 @@ public class EmployerServiceImpl implements EmployerService {
 		return new EmployeeListDto(employeeDtos, totalCount);
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see com.sg.employer.service.EmployerService#getAllDepartments()
 	 */
 	@Override
 	public List<DepartmentDto> getAllDepartments() {
 		List<DepartmentDto> departmentDtos = new ArrayList<>();
-		List<Department> departments = departmentDao.findAll(Sort.by(EmployerApiApplicationConstants.DEPARTMENT_NAME).ascending());
-		if(CollectionUtils.isEmpty(departments)) {
+		List<Department> departments = departmentDao
+				.findAll(Sort.by(EmployerApiApplicationConstants.DEPARTMENT_NAME).ascending());
+		if (CollectionUtils.isEmpty(departments)) {
 			log.debug("No departments found");
 			throw new NoDataFoundException("No departments found");
 		}
@@ -101,5 +113,4 @@ public class EmployerServiceImpl implements EmployerService {
 		return departmentDtos;
 	}
 
-	
 }

@@ -4,8 +4,8 @@ spring:
   cloud:
     consul:
       discovery:
-        hostname: localhost
-        port: 5555
+        hostname: employer-api
+        port: 8888
         healthCheckPath: /employer/api/actuator/health
         healthCheckInterval: 5s
       config:

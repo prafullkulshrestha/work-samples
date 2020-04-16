@@ -1,5 +1,5 @@
 import { async, ComponentFixture, TestBed, fakeAsync, tick } from '@angular/core/testing';
-import { FormsModule, ReactiveFormsModule, FormGroup, FormControl, Validators } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule, NgForm, FormGroupDirective } from '@angular/forms';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { EnrollEmployeeComponent } from './enroll-employee.component';
 import { of } from 'rxjs';
@@ -11,38 +11,14 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import 'hammerjs';
 import { Department } from '../../models/Department';
 import { throwError } from 'rxjs'; 
+import * as moment from 'moment';
 
 describe('EnrollEmployeeComponent', () => {
   let component: EnrollEmployeeComponent;
   let fixture: ComponentFixture<EnrollEmployeeComponent>;
-  const data = {
-       id: 100,
-       firstName: 'Prafull',
-       lastName: 'Kulshrestha',
-       gender: 'Male',
-       dateOfBirth: '1982-07-07',
-       department: {
-         departmentId: 101,
-         departmentName: 'IT'
-       }
-      };
-  const departments : Department []= [
-    {
-      departmentId: 120,
-      departmentName: 'HR',
-      description: 'HR Department'
-    },
-    {
-      departmentId: 121,
-      departmentName: 'IT',
-      description: 'IT Department'
-    },
-    {
-      departmentId: 122,
-      departmentName: 'Finance',
-      description: 'Finance Department'
-    }
-  ]; 
+  let originalTimeout;
+  let  data: any;
+  let departments : Department [];
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -60,6 +36,40 @@ describe('EnrollEmployeeComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(EnrollEmployeeComponent);
     component = fixture.debugElement.componentInstance;
+    originalTimeout = jasmine.DEFAULT_TIMEOUT_INTERVAL;
+    jasmine.DEFAULT_TIMEOUT_INTERVAL = 1000000;
+    data = {
+      id: 100,
+      firstName: 'Prafull',
+      lastName: 'Kulshrestha',
+      gender: 'Male',
+      dateOfBirth: '1982-07-07',
+      department: {
+        departmentId: 101,
+        departmentName: 'IT'
+      }
+     };
+    departments = [
+      {
+        departmentId: 120,
+        departmentName: 'HR',
+        description: 'HR Department'
+      },
+      {
+        departmentId: 121,
+        departmentName: 'IT',
+        description: 'IT Department'
+      },
+      {
+        departmentId: 122,
+        departmentName: 'Finance',
+        description: 'Finance Department'
+      }
+    ]; 
+  });
+
+  afterEach(function() {
+    jasmine.DEFAULT_TIMEOUT_INTERVAL = originalTimeout;
   });
 
   it('should create', () => {
@@ -127,12 +137,11 @@ describe('EnrollEmployeeComponent', () => {
   }));
 
   it('should have called the reset after saving if called asynchronously', fakeAsync(() => {
-    const employeeService = fixture.debugElement.injector.get(EmployerService);
     component.ngOnInit();
-    const employeeFormGroup = fixture.debugElement.componentInstance.employeeFormGroup;
-    spyOn(employeeService, 'createEmployee').and.returnValue(of(data));
+    const employeeFormGroup = component.employeeFormGroup;
+    spyOn(component, 'save');
     spyOn(employeeFormGroup, 'reset');
-    component.save();
+     component.onSubmit();
     fixture.detectChanges();
     tick(10000);
     expect(employeeFormGroup.reset).toHaveBeenCalled();
@@ -157,7 +166,6 @@ describe('EnrollEmployeeComponent', () => {
   }));
 
   it('should submit employee details if called on the enroll employee form', fakeAsync(() => {
-   // const employeeService = fixture.debugElement.injector.get(EmployerService);
     component.ngOnInit();
      spyOn(component, 'save');
       component.onSubmit();
@@ -171,9 +179,44 @@ describe('EnrollEmployeeComponent', () => {
     expect(compiled.querySelector('mat-card-title').textContent).toContain('Enroll New Employee');
   });
 
-  it('should contain a create button', () => {
+  it('should contain a create button', async(() => {
+    fixture.detectChanges();
     const compiled: HTMLElement = fixture.debugElement.nativeElement;
-    expect(compiled.querySelector('button').textContent).toContain('Create');
-  });
+    var buttons = compiled.querySelectorAll('button');
+    expect(Array.from(buttons).some((b) => b.firstChild.textContent === 'Create')).toEqual(true);
+  }));
+
+  it('should contain a reset button', async(() => {
+    fixture.detectChanges();
+    const compiled: HTMLElement = fixture.debugElement.nativeElement;
+    var buttons = compiled.querySelectorAll('button');
+    expect(Array.from(buttons).some((b) => b.firstChild.textContent === 'Reset')).toEqual(true);
+  }));
+
+  it('should have called the reset after changing the form values and if clicked', async(() => {
+    fixture.detectChanges();
+    component.ngOnInit();
+    const employeeFormGroup = component.employeeFormGroup;
+    employeeFormGroup.controls['firstName'].setValue("testFirstName");
+    component.reset();
+    fixture.detectChanges();
+    expect(employeeFormGroup.controls['firstName'].value).toBeNull();
+  }));
+
+  it('should raise a validation error when input dob leaves an emplyee age < 18 and > 60 ', async(() => {
+    fixture.detectChanges();
+    var dobElement = component.employeeFormGroup.controls['dateOfBirth'];
+    dobElement.setValue(new Date());
+    fixture.detectChanges();
+    expect(dobElement.errors.dateRangeError).toEqual(true);
+  }));
+
+  it('should not raise a validation error when input dob leaves an emplyee age > 18 and < 60 ', async(() => {
+    fixture.detectChanges();
+    var dobElement = component.employeeFormGroup.controls['dateOfBirth'];
+    dobElement.setValue(moment(new Date()).subtract(19, 'years'));
+    fixture.detectChanges();
+    expect(dobElement.errors.dateRangeError).toBeUndefined();
+  }));
 
 });

@@ -1,0 +1,16 @@
+version: '3.3'
+services:
+    node:
+      container_name: nodeapp
+      build: .
+      environment:
+        PORTAL_ENVIRONMENT: "prod"
+      ports:
+        - '8080:80'
+      networks:
+        - config_default
+
+networks:
+ config_default:
+    external:
+      name: config_default

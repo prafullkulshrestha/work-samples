@@ -89,7 +89,7 @@ public class Department extends BaseEntity {
 			return true;
 		if ((other == null))
 			return false;
-		if (!(other instanceof Employee))
+		if (!(other instanceof Department))
 			return false;
 
 		Department castOther = (Department) other;

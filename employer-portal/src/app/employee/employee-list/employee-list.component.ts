@@ -22,7 +22,7 @@ export class EmployeeListComponent implements OnInit {
     pageNo: this.pageIndex,
     pageSize: this.pageSize,
     sortCriteria: {
-      firstName: true
+      firstName: false
     }
   }
 
@@ -78,7 +78,7 @@ export class EmployeeListComponent implements OnInit {
     this.searchAndSortCriteria.sortCriteria = {};
     let active: string = sort.active;
     let direction: string = sort.direction;
-    this.searchAndSortCriteria.sortCriteria[active] = (direction === 'asc')
+    this.searchAndSortCriteria.sortCriteria[active] = (direction !== 'asc')
     this.loadData();
   }
 

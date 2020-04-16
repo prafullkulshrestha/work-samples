@@ -11,77 +11,8 @@ import { throwError } from 'rxjs';
 describe('EmployeeListComponent', () => {
   let component: EmployeeListComponent;
   let fixture: ComponentFixture<EmployeeListComponent>;
-  const data = {
-    totalCount : 3,
-    employeeList : [
-    {
-     employeeId: 100,
-     firstName: 'Prafull',
-     lastName: 'Kulshrestha',
-     gender: 'Male',
-     dateOfBirth: '1982-07-07',
-     department: {
-       departmentId: 107,
-       departmentName: 'IT'
-     }
-    },
-    {
-      employeeId: 101,
-     firstName: 'Pooja',
-     lastName: 'Kulshrestha',
-     gender: 'Female',
-     dateOfBirth: '1987-05-22',
-     department: {
-      departmentId: 108,
-      departmentName: 'Human Resource'
-    }
-    },
-    {
-      employeeId: 102,
-     firstName: 'Praagy',
-     lastName: 'Kulshrestha',
-     gender: 'Male',
-     dateOfBirth: '2015-11-06',
-     department: {
-      departmentId: 109,
-      departmentName: 'Education'
-    }
-    }
-  ]};
-  const employeeData = [
-    {
-     id: 100,
-     firstName: 'Prafull',
-     lastName: 'Kulshrestha',
-     gender: 'Male',
-     dateOfBirth: '1982-07-07',
-     department: 'IT'
-    },
-    {
-     id: 101,
-     firstName: 'Pooja',
-     lastName: 'Kulshrestha',
-     gender: 'Female',
-     dateOfBirth: '1987-05-22',
-     department: 'Human Resource'
-    },
-    {
-     id: 102,
-     firstName: 'Praagy',
-     lastName: 'Kulshrestha',
-     gender: 'Male',
-     dateOfBirth: '2015-11-06',
-     department: 'Education'
-    }
-  ];
-
-  const searchAndSortCriteria: any = {
-    pageNo: 0,
-    pageSize: 5,
-    sortCriteria: {
-      firstName: true
-    }
-  }
+  let data: any; 
+  let employeeData: any; 
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -98,6 +29,70 @@ describe('EmployeeListComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(EmployeeListComponent);
     component = fixture.debugElement.componentInstance;
+    data = {
+      totalCount : 3,
+      employeeList : [
+      {
+       employeeId: 100,
+       firstName: 'Prafull',
+       lastName: 'Kulshrestha',
+       gender: 'Male',
+       dateOfBirth: '1982-07-07',
+       department: {
+         departmentId: 107,
+         departmentName: 'IT'
+       }
+      },
+      {
+        employeeId: 101,
+       firstName: 'Pooja',
+       lastName: 'Kulshrestha',
+       gender: 'Female',
+       dateOfBirth: '1987-05-22',
+       department: {
+        departmentId: 108,
+        departmentName: 'Human Resource'
+      }
+      },
+      {
+        employeeId: 102,
+       firstName: 'Praagy',
+       lastName: 'Kulshrestha',
+       gender: 'Male',
+       dateOfBirth: '2015-11-06',
+       department: {
+        departmentId: 109,
+        departmentName: 'Education'
+      }
+      }
+    ]};
+
+    employeeData = [
+      {
+       id: 100,
+       firstName: 'Prafull',
+       lastName: 'Kulshrestha',
+       gender: 'Male',
+       dateOfBirth: '1982-07-07',
+       department: 'IT'
+      },
+      {
+       id: 101,
+       firstName: 'Pooja',
+       lastName: 'Kulshrestha',
+       gender: 'Female',
+       dateOfBirth: '1987-05-22',
+       department: 'Human Resource'
+      },
+      {
+       id: 102,
+       firstName: 'Praagy',
+       lastName: 'Kulshrestha',
+       gender: 'Male',
+       dateOfBirth: '2015-11-06',
+       department: 'Education'
+      }
+    ];
   });
 
   it('should create', () => {
@@ -146,9 +141,9 @@ describe('EmployeeListComponent', () => {
 
   }));
 
-  it('should contain 4 child nodes under mat-card', () => {
+  it('should contain 3 child node under mat-card', () => {
     const compiled: HTMLElement = fixture.debugElement.nativeElement;
-    expect(compiled.querySelector('mat-card').childNodes.length).toEqual(4);
+    expect(compiled.querySelector('mat-card').childNodes.length).toEqual(3);
   });
 
   it('should contain mat-table child node', () => {
