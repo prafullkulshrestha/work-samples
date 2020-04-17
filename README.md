@@ -1,5 +1,5 @@
 # work-samples
-Please see the respective README.md files in the sub projects for more details. PLease find below details to run the project.
+Please see the respective README.md files in the sub projects for more details. Please find below details to run the project.
 
 * Run the config server docker container
 * Run the  database docker container
