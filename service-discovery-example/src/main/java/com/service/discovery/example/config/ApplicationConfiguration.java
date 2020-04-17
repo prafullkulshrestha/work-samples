@@ -58,7 +58,7 @@ public class ApplicationConfiguration  {
 	private ApiInfo apiInfo() {
 		return new ApiInfo("Service discovery example REST API",
 				"The project exposes the APIs for showing the service discovery, by reading the employer api details "
-				+ "from consul, disovering the employer-api service and calling one of its endpoint",
+				+ "from consul, discovering the employer-api service and calling one of its endpoint",
 				"API TOS", "Terms of service",
 				new Contact("Prafull Kulshrestha", "www.example.com", "prafull.kulshrestha@gmail.com"),
 				"License of API", "API license URL", Collections.emptyList());
