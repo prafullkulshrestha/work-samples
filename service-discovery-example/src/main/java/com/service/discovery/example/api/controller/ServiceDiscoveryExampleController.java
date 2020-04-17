@@ -11,6 +11,7 @@ import javax.naming.ServiceUnavailableException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -44,17 +45,25 @@ public class ServiceDiscoveryExampleController {
 	@Autowired
 	private RestTemplate restTemplate;
 	
+	@Value("${employer-api.context-path}")
+	private String employerApiContextPath;
+	
+	@Value("${employer-api.departments.endpoint.uri}")
+	private String employerApiDepartmentsEndpointId;
+	
+	@Value("${employer-api.instance.id}")
+	private String employerApiInstnaceId;
+	
 	@ApiOperation(httpMethod = "GET", value = "The API for searching the employer service and getting all the departments from it")
 	@GetMapping(value = "/v1/departments", produces = "application/json")
 	public ResponseEntity<List<String>> getAllDepartments() throws IOException, ParseException, ServiceUnavailableException{
 		log.debug("Request recieved for getting all the departments' details ");
-		URI service = serviceDiscoveryExampleUtils.serviceUrl()
-			      .map(s -> s.resolve("/employer/api/v1/departments"))
+		URI service = serviceDiscoveryExampleUtils.serviceUrl(employerApiInstnaceId)
+			      .map(s -> s.resolve(employerApiContextPath + employerApiDepartmentsEndpointId))
 			      .orElseThrow(ServiceUnavailableException::new);
 			     String departmentsString =  restTemplate.getForEntity(service, String.class).getBody();
 			    		 ObjectMapper mapper = new ObjectMapper();
 			    		 
-			    System.out.println("=========================> "+ departmentsString);
 			    List<Department> departmentsList = mapper.readValue(departmentsString, new TypeReference<List<Department>>(){});
 			     List<String> departments =  departmentsList.stream().map((d) -> d.getDepartmentName()).collect(Collectors.toList());
 		log.debug("Request completed for getting all the department' details");
