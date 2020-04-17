@@ -16,7 +16,7 @@
 
 ## Import
 
-* Unzip the project source code zip file.
+* Clone the git repository.
 * In spring source tool IDE, click - File -> New -> "Java Project".
 * Refer to the root directory of you project to import it as a new project
 * Right click on the project in the IDE, go to "Configure" -> "Convert to maven project"
