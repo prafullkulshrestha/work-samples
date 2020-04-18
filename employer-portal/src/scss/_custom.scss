@@ -145,3 +145,16 @@ $base-color: map-get($md-employer, 500);
     font-size: 1rem;
     font-weight: 400;
     }
+
+    .ad{
+        display:flex;
+        flex-direction:coloumn;
+        height:100%;
+       }
+       img,mat-card-content{
+       flex-grow: 1;
+       }
+       mat-card-actions{
+       display: inline-block;
+       align-self: flex-end;
+       }

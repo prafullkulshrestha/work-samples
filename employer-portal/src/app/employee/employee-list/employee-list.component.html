@@ -3,7 +3,10 @@
     <mat-card-title>View All Employees</mat-card-title>
   </mat-card-header>
   <mat-spinner [style.display]="loading ? 'block' : 'none'" class="spinner-position" mode="indeterminate"></mat-spinner>
-  <div class="container py-5" *ngIf="!errorLoadingEmployees">
+  <div fxLayout="column" fxFlexAlign="center">
+      <div fxFlex="55px"></div>
+    </div>
+  <div *ngIf="!errorLoadingEmployees">
     <mat-table matSortActive="firstName" matSortDirection="asc" [style.display]="loading === false ? 'block' : 'none'" #table
       [dataSource]="dataSource" matSort (matSortChange)="onSortData($event)">
       <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
