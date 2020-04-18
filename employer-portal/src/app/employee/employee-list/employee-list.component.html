@@ -39,9 +39,12 @@
     <mat-paginator #paginator [style.display]="loading === false ? 'block' : 'none'" [length]="totalCount" [pageSizeOptions]="[5, 10, 25, 100]"
       [pageSize]="pageSize" (page)="onPageChanged($event)"></mat-paginator>
   </div>
-  <div class="text-center" *ngIf="errorLoadingEmployees">
+  <div fxLayout="column" fxFlexAlign="center">
+      <div fxFlex="10px"></div>
+    </div>
+  <div *ngIf="errorLoadingEmployees" fxLayout="row" fxLayoutAlign="center center" fxLayout.lt-sm="column">
       <mat-error class="employee-error">
           {{errorMessageLoadingEmployees}}
-        </mat-error>
-  </div>
+      </mat-error>
+    </div>
 </mat-card>
