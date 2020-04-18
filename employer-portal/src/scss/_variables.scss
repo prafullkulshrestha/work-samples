@@ -1,5 +1,4 @@
 @import "custom"; 
-//@import "../../node_modules/bootstrap/dist/css/bootstrap.min.css";
 //Here we importing _custom.scss file but we don't need to include underscore.
 $sample-app-theme:   mat-light-theme($primary,$accent,$warn);
 $background: map-get($sample-app-theme, background);

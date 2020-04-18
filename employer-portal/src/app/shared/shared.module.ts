@@ -35,6 +35,7 @@ import { MatButtonModule
 , MatTableModule
 } from '@angular/material';
 import { FooterComponent } from './components/footer/footer.component';
+import { FlexLayoutModule } from '@angular/flex-layout';
 
 const MATERIAL_MODULES: any[] = [
 	MatButtonModule
@@ -61,6 +62,7 @@ const MATERIAL_MODULES: any[] = [
 	, MatSnackBarModule
 	, MatSortModule
 	, MatTableModule
+	, FlexLayoutModule
 ];
 
 // const CUSTOM_MOMENT_FORMATS = {

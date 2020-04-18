@@ -118,9 +118,6 @@ $base-color: map-get($md-employer, 500);
         -webkit-overflow-scrolling: touch;
     } 
 
-    .mat-form-field {
-        width: 100%;
-      }
     .mat-radio-group {
         width: 100%;
     }
@@ -148,3 +145,16 @@ $base-color: map-get($md-employer, 500);
     font-size: 1rem;
     font-weight: 400;
     }
+
+    .ad{
+        display:flex;
+        flex-direction:coloumn;
+        height:100%;
+       }
+       img,mat-card-content{
+       flex-grow: 1;
+       }
+       mat-card-actions{
+       display: inline-block;
+       align-self: flex-end;
+       }
